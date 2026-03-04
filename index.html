@@ -35,7 +35,7 @@ body { background:var(--dark); color:var(--text); font-family:'Nunito',sans-seri
 .cart-count { background:white; color:var(--red); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; transition:transform .2s; }
 .cart-count.bump { transform:scale(1.5); }
 
-/* HERO Ramprog2026*/
+/* HERO */
 .hero { background:linear-gradient(135deg,var(--dark2) 0%,#1a0006 100%); padding:30px 24px; text-align:center; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
 .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 65% 50%,rgba(232,0,29,.18) 0%,transparent 68%); }
 .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,7vw,60px); letter-spacing:5px; position:relative; line-height:1; }
@@ -44,7 +44,7 @@ body { background:var(--dark); color:var(--text); font-family:'Nunito',sans-seri
 .pide-badge { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:white; padding:7px 18px; border-radius:22px; font-size:13px; font-weight:900; margin-top:12px; position:relative; }
 
 /* CAT NAV */
-.cat-nav { background:var(--dark2); padding:10px 20px; display:flex; flex-wrap:wrap; gap:6px; border-bottom:1px solid var(--border); scrollbar-width:none; position:sticky; position:-webkit-sticky; top:78px; z-index:90; transition:transform .0.5s ease, opacity .0.5s ease; }
+.cat-nav { background:var(--dark2); padding:10px 20px; display:flex; flex-wrap:wrap; gap:6px; border-bottom:1px solid var(--border); scrollbar-width:none; position:sticky; position:-webkit-sticky; top:78px; z-index:90; transition:transform .3s ease, opacity .3s ease; }
 .cat-nav.nav-hidden { transform:translateY(-110%); opacity:0; pointer-events:none; }
 .cat-nav::-webkit-scrollbar { display:none; }
 .cat-tab { padding:6px 14px; font-family:'Nunito',sans-serif; font-size:12px; font-weight:800; letter-spacing:0.3px; text-transform:uppercase; color:var(--muted); cursor:pointer; border:1.5px solid var(--border); background:var(--dark3); border-radius:20px; white-space:nowrap; transition:all .2s; }
@@ -56,7 +56,7 @@ body { background:var(--dark); color:var(--text); font-family:'Nunito',sans-seri
 
 /* SECTION */
 .section { margin-bottom:44px; }
-.section-title { font-family:'Bebas Neue',sans-serif; font-size:35px; letter-spacing:3px; margin-bottom:16px; padding-bottom:12px; border-bottom:2px solid var(--border2); display:flex; align-items:center; gap:10px; color:var(--text); }
+.section-title { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:3px; margin-bottom:16px; padding-bottom:12px; border-bottom:2px solid var(--border2); display:flex; align-items:center; gap:10px; color:var(--text); }
 .section-title span { color:var(--red); }
 
 /* GRID */
@@ -223,7 +223,17 @@ body { background:var(--dark); color:var(--text); font-family:'Nunito',sans-seri
 .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(60px); background:#1a5c2a; color:white; padding:12px 26px; border-radius:30px; font-weight:900; font-size:14px; z-index:400; transition:transform .3s; white-space:nowrap; pointer-events:none; }
 .toast.show { transform:translateX(-50%) translateY(0); }
 
-/* ═══ RESPONSIVE ═══ */
+/* DRINKS SECTION */
+#cat-getraenke .items-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+#cat-getraenke .item-body { padding:14px 12px; }
+#cat-getraenke .item-name { font-size:15px; }
+#cat-getraenke .item-desc { font-size:12px; margin-bottom:10px; }
+#cat-getraenke .price-tag { font-size:20px; }
+#cat-getraenke .single-price-row { margin-bottom:10px; }
+@media(max-width:600px){
+  #cat-getraenke .items-grid { grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
+}
+
 
 /* Tablet (≤900px) */
 @media(max-width:900px){
@@ -248,7 +258,7 @@ body { background:var(--dark); color:var(--text); font-family:'Nunito',sans-seri
   .pide-badge { font-size:12px; padding:6px 14px; }
 
   /* Nav */
-  .cat-nav { top:62px; padding:0 10px; }
+  .cat-nav { top:62px; padding:8px 10px; flex-wrap:wrap; }
   .cat-tab { padding:11px 12px; font-size:12px; }
 
   /* Main */
@@ -442,7 +452,7 @@ const EXTRAS={
   spargel:    {label:'Extra Spargel',price:1.00,cat:'veg'},
   ananas:     {label:'Extra Ananas',price:1.00,cat:'veg'},
   ei:         {label:'Extra Ei',price:1.00,cat:'veg'},
-  // 🫙 Saucen (1,00 €)
+  broetchen:  {label:'4 ofenfrische Brötchen',price:1.50,cat:'side'},
   hollandaise:{label:'Sauce Hollandaise',price:1.00,cat:'sauce'},
   bbq:        {label:'BBQ-Sauce',price:1.00,cat:'sauce'},
   tzatziki:   {label:'Extra Tzatziki',price:1.00,cat:'sauce'},
@@ -457,24 +467,24 @@ const EXTRAS={
 // ════════════ MENU DATA ════════════
 const menu={
   kebap:{title:'KebapRollen',icon:'🌯',items:[
-    {id:'01',name:'Kebap',desc:'Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:7.50,Mittel:8.50,Groß:10.00},ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['haehnchen','kebap','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'02',name:'Kebap Spezial',desc:'Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Käse überbacken',sizes:{Klein:8.50,Mittel:9.50,Groß:11.00},ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Käse'],ex:['haehnchen','kebap','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
-    {id:'03',name:'Kebap Hirtenkäse Spezial',desc:'Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Hirtenkäse überbacken',sizes:{Klein:8.50,Mittel:9.50,Groß:11.00},ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Hirtenkäse'],ex:['haehnchen','kebap','sucuk','cheese','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
-    {id:'04',name:'Hähnchen Döner',desc:'Hähnchenfleisch in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:7.50,Mittel:8.50,Groß:10.00},ing:['Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'05',name:'Hähnchen Döner Spezial',desc:'Hähnchenfleisch in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Käse überbacken',sizes:{Klein:8.50,Mittel:9.50,Groß:11.00},ing:['Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Käse'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
-    {id:'06',name:'Kebap Mix',desc:'Kebap und Hähnchenfleisch in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:8.00,Mittel:9.00,Groß:10.00},ing:['Kebap','Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
-    {id:'07',name:'Chilli Cheese Kebap',desc:'Kebap mit Tomaten, Zwiebeln, Eisbergsalat, Goudakäse, Cheddar, Jalapeños, scharfe Chili-Cheese-Sauce und Tzatziki',sizes:{Klein:9.00,Mittel:10.00,Groß:11.00},isNew:true,isSpicy:true,ing:['Kebap','Tomaten','Zwiebeln','Eisbergsalat','Goudakäse','Cheddar','Jalapeños','Chili-Cheese-Sauce','Tzatziki'],ex:['haehnchen','kebap','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','tomaten','tzatziki','chili','bbq']},
-    {id:'08',name:'Türkische Pizza',desc:'Rindergehacktes in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:7.00,Mittel:8.00,Groß:9.00},ing:['Rindergehacktes','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','knoblauch']},
-    {id:'09',name:'Türkische Pizza Spezial',desc:'Rindergehacktes und Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:8.50,Mittel:9.50,Groß:11.00},ing:['Rindergehacktes','Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
+    {id:'01',name:'Kebap',desc:'Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:8.00,Mittel:9.50,Groß:11.00},ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['haehnchen','kebap','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'02',name:'Kebap Spezial',desc:'Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Käse überbacken',sizes:{Klein:9.00,Mittel:10.50,Groß:12.00},ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Käse'],ex:['haehnchen','kebap','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
+    {id:'03',name:'Kebap Hirtenkäse Spezial',desc:'Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Hirtenkäse überbacken',sizes:{Klein:9.00,Mittel:10.50,Groß:12.00},ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Hirtenkäse'],ex:['haehnchen','kebap','sucuk','cheese','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
+    {id:'04',name:'Hähnchen Döner',desc:'Hähnchenfleisch in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:8.00,Mittel:9.50,Groß:11.00},ing:['Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'05',name:'Hähnchen Döner Spezial',desc:'Hähnchenfleisch in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Käse überbacken',sizes:{Klein:9.00,Mittel:10.50,Groß:12.00},ing:['Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Käse'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
+    {id:'06',name:'Kebap Mix',desc:'Kebap und Hähnchenfleisch in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:9.00,Mittel:10.50,Groß:12.00},ing:['Kebap','Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
+    {id:'07',name:'Chilli Cheese Kebap',desc:'Kebap mit Tomaten, Zwiebeln, Eisbergsalat, Goudakäse, Cheddar, Jalapeños, scharfe Chili-Cheese-Sauce und Tzatziki',sizes:{Klein:9.00,Mittel:10.50,Groß:12.00},isNew:true,isSpicy:true,ing:['Kebap','Tomaten','Zwiebeln','Eisbergsalat','Goudakäse','Cheddar','Jalapeños','Chili-Cheese-Sauce','Tzatziki'],ex:['haehnchen','kebap','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','tomaten','tzatziki','chili','bbq']},
+    {id:'08',name:'Türkische Pizza',desc:'Rindergehacktes in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:8.00,Mittel:9.00,Groß:10.00},ing:['Rindergehacktes','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','knoblauch']},
+    {id:'09',name:'Türkische Pizza Spezial',desc:'Rindergehacktes und Kebap in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat und Tzatziki',sizes:{Klein:9.00,Mittel:10.50,Groß:12.00},ing:['Rindergehacktes','Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','cheese','hirtenkase','jalapenos','mushrooms','olives','onions','paprika','mais','tomaten','tzatziki','hollandaise','chili','bbq']},
   ]},
   teller:{title:'Tellergerichte',icon:'🍽',items:[
-    {id:'10',name:'Kebap Teller',desc:'Kebap mit Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Pommes frites oder Brot',price:13.00,ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Pommes/Brot'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'11',name:'Kebap Teller Spezial',desc:'Kebap mit Käse überbacken, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:14.00,ing:['Kebap','Käse','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'12',name:'Hähnchen Teller',desc:'Hähnchenfleisch mit Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:13.00,ing:['Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'10',name:'Kebap Teller',desc:'Kebap mit Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki, Pommes frites oder Brot',price:13.50,ing:['Kebap','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Pommes/Brot'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'11',name:'Kebap Teller Spezial',desc:'Kebap mit Käse überbacken, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:14.50,ing:['Kebap','Käse','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'12',name:'Hähnchen Teller',desc:'Hähnchenfleisch mit Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:13.50,ing:['Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
     {id:'12a',name:'Mix Teller',desc:'Kebap und Hähnchenfleisch, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:14.00,ing:['Kebap','Hähnchen','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'12b',name:'King Teller',desc:'Kebap (scharf) mit Käse überbacken, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + hausgemachtes Lahmacun',price:14.50,isSpicy:true,ing:['Kebap','Käse','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Lahmacun'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'12c',name:'Chilli Cheese Kebap Teller',desc:'Kebap mit Chili-Cheese-Sauce und Jalapeños überbacken, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:14.50,isNew:true,isSpicy:true,ing:['Kebap','Chili-Cheese-Sauce','Jalapeños','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
-    {id:'12d',name:'Falafel Teller',desc:'8 Stück Falafel (Kichererbsen), frisches Pizzabrot, Salat und Knoblauchsauce',price:11.00,isNew:true,ing:['Falafel','Pizzabrot','Salat','Knoblauchsauce'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'12b',name:'King Teller',desc:'Kebap (scharf) mit Käse überbacken, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + hausgemachtes Lahmacun',price:15.00,isSpicy:true,ing:['Kebap','Käse','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki','Lahmacun'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'12c',name:'Chilli Cheese Kebap Teller',desc:'Kebap mit Chili-Cheese-Sauce und Jalapeños überbacken, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Tzatziki + Pommes oder Brot',price:15.00,isNew:true,isSpicy:true,ing:['Kebap','Chili-Cheese-Sauce','Jalapeños','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Tzatziki'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
+    {id:'12d',name:'Falafel Teller',desc:'8 Stück Falafel (Kichererbsen), frisches Pizzabrot, Salat und Knoblauchsauce',price:12.00,isNew:true,ing:['Falafel','Pizzabrot','Salat','Knoblauchsauce'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','tzatziki','hollandaise','chili','bbq','knoblauch']},
   ]},
   fladenbrot:{title:'Fladenbrot-Rollen',icon:'🫓',items:[
     {id:'13',name:'Sucuk Rolle',desc:'Türkische Knoblauchwurst in Pizzateig, Tomaten, Weiß-, Rotkraut, Zwiebeln, Eisbergsalat, Remoulade, Käse überbacken',sizes:{Klein:7.00,Mittel:8.00,Groß:9.00},ing:['Sucuk','Tomaten','Weißkraut','Rotkraut','Zwiebeln','Eisbergsalat','Remoulade','Käse'],ex:['kebap','haehnchen','sucuk','salami','schinken','thunfisch','cheese','hirtenkase','mozzarella','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','remoulade','tzatziki','hollandaise','chili','bbq','knoblauch']},
@@ -571,28 +581,28 @@ const menu={
     {id:'36b',name:'Kapsalon Kebap',desc:'Pommes frites und Kebap mit Cheddar und Goudakäse überbacken, Eisbergsalat, Knoblauchsauce',price:10.00,ing:['Pommes','Kebap','Cheddar','Gouda','Eisbergsalat','Knoblauchsauce'],ex:['kebap','haehnchen','sucuk','salami','schinken','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','tomaten','jalapenos','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade']},
   ]},
   pasta:{title:'Pasta & Auflauf',icon:'🍝',items:[
-    {id:'63',name:'Spaghetti',desc:'Fadennudeln in Rinder-Bolognese-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Spaghetti','Bolognese-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'64',name:'Tortellini Spezial',desc:'Nudeln mit Thunfisch in Schinken-Sahne-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:12.00,ing:['Tortellini','Thunfisch','Schinken-Sahne-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'65',name:'Tortellini',desc:'In Schinken-Sahne-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Tortellini','Schinken-Sahne-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'66',name:'Rigatoni Tonno',desc:'Mit Thunfisch in Sahne-Sauce, mit Käse überbacken',price:11.00,isNew:true,ing:['Rigatoni','Thunfisch','Sahne-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'66a',name:'Rigatoni Pollo',desc:'Mit Hähnchenstreifen, Brokkoli, Paprika, Sahne-Sauce, mit Käse überbacken',price:12.00,isNew:true,ing:['Rigatoni','Hähnchen','Brokkoli','Paprika','Sahne-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'67',name:'Rigatoni Chef',desc:'Mit Kebap, Zwiebeln, fr. Pilze, in Sahne-Sauce, mit Käse überbacken',price:12.00,isNew:true,ing:['Rigatoni','Kebap','Zwiebeln','Pilze','Sahne-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'67a',name:'Brazil-Auflauf',desc:'Kartoffel-Gratin, Hähnchenfleisch, Brokkoli, Sauce Hollandaise, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Kartoffel-Gratin','Hähnchen','Brokkoli','Sauce Hollandaise','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'68',name:'Gemüse-Auflauf',desc:'Kartoffel-Gratin, Paprika, Brokkoli, fr. Pilze, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Kartoffel-Gratin','Paprika','Brokkoli','Pilze','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'69',name:'Kebap-Auflauf',desc:'Kartoffel-Gratin, Kebap, fr. Pilze, Rahm-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Kartoffel-Gratin','Kebap','Pilze','Rahm-Sauce','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
-    {id:'69a',name:'Emlichheim-Auflauf',desc:'Kartoffel-Gratin, Hähnchenbruststreifen, Mais, Brokkoli, Sauce Hollandaise, mit Käse überbacken',price:10.00,ing:['Kartoffel-Gratin','Hähnchen','Mais','Brokkoli','Sauce Hollandaise','Käse'],ex:['kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'63',name:'Spaghetti',desc:'Fadennudeln in Rinder-Bolognese-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Spaghetti','Bolognese-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'64',name:'Tortellini Spezial',desc:'Nudeln mit Thunfisch in Schinken-Sahne-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:12.00,ing:['Tortellini','Thunfisch','Schinken-Sahne-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'65',name:'Tortellini',desc:'In Schinken-Sahne-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Tortellini','Schinken-Sahne-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'66',name:'Rigatoni Tonno',desc:'Mit Thunfisch in Sahne-Sauce, mit Käse überbacken',price:11.00,isNew:true,ing:['Rigatoni','Thunfisch','Sahne-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'66a',name:'Rigatoni Pollo',desc:'Mit Hähnchenstreifen, Brokkoli, Paprika, Sahne-Sauce, mit Käse überbacken',price:12.00,isNew:true,ing:['Rigatoni','Hähnchen','Brokkoli','Paprika','Sahne-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'67',name:'Rigatoni Chef',desc:'Mit Kebap, Zwiebeln, fr. Pilze, in Sahne-Sauce, mit Käse überbacken',price:12.00,isNew:true,ing:['Rigatoni','Kebap','Zwiebeln','Pilze','Sahne-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'67a',name:'Brazil-Auflauf',desc:'Kartoffel-Gratin, Hähnchenfleisch, Brokkoli, Sauce Hollandaise, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Kartoffel-Gratin','Hähnchen','Brokkoli','Sauce Hollandaise','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'68',name:'Gemüse-Auflauf',desc:'Kartoffel-Gratin, Paprika, Brokkoli, fr. Pilze, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Kartoffel-Gratin','Paprika','Brokkoli','Pilze','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'69',name:'Kebap-Auflauf',desc:'Kartoffel-Gratin, Kebap, fr. Pilze, Rahm-Sauce, mit Käse überbacken (+4 Brötchen nur €1,50)',price:10.00,ing:['Kartoffel-Gratin','Kebap','Pilze','Rahm-Sauce','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
+    {id:'69a',name:'Emlichheim-Auflauf',desc:'Kartoffel-Gratin, Hähnchenbruststreifen, Mais, Brokkoli, Sauce Hollandaise, mit Käse überbacken',price:10.00,ing:['Kartoffel-Gratin','Hähnchen','Mais','Brokkoli','Sauce Hollandaise','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
   ]},
   salat:{title:'Salat',icon:'🥗',items:[
-    {id:'70',name:'Chefsalat',desc:'Eisbergsalat, Tomaten, Gurken, Thunfisch, Hirtenkäse und Ei (+4 Brötchen nur €1,50)',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch','Hirtenkäse','Ei'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'70',name:'Chefsalat',desc:'Eisbergsalat, Tomaten, Gurken, Thunfisch, Hirtenkäse und Ei (+4 Brötchen nur €1,50)',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch','Hirtenkäse','Ei'],ex:['broetchen','broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
     {id:'71',name:'Gemischter Salat',desc:'Eisbergsalat, Tomaten, Gurken und Zwiebeln',sizes:{Klein:4.50,Groß:7.00},ing:['Eisbergsalat','Tomaten','Gurken','Zwiebeln'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'72',name:'Thunfisch Salat',desc:'Eisbergsalat, Tomaten, Gurken und Thunfisch',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'73',name:'Cobansalat',desc:'Eisbergsalat, Tomaten, Gurken, Hirtenkäse, Peperoni und Zwiebeln',price:8.00,ing:['Eisbergsalat','Tomaten','Gurken','Hirtenkäse','Peperoni','Zwiebeln'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'74',name:'Hähnchensalat',desc:'Eisbergsalat, Tomaten, Gurken, Hähnchenfleisch, Zwiebeln und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Hähnchen','Zwiebeln','Käse'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'75',name:'Spezialsalat',desc:'Eisbergsalat, Tomaten, Gurken, fr. Paprika, Mais, Thunfisch, Schinken, Ei und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Paprika','Mais','Thunfisch','Schinken','Ei','Käse'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'76',name:'Hirtensalat',desc:'Eisbergsalat, Tomaten, Gurken, Hirtenkäse und Oliven',price:7.50,ing:['Eisbergsalat','Tomaten','Gurken','Hirtenkäse','Oliven'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'77',name:'Thunfisch Spezialsalat',desc:'Eisbergsalat, Tomaten, Gurken, Thunfisch, Oliven, Peperoni, Zwiebeln',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch','Oliven','Peperoni','Zwiebeln'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'79s',name:'Fit Industry Salat',desc:'Eisbergsalat, Hähnchenbruststreifen, Tomaten, Gurken, Mais, fr. Paprika und Zwiebeln',price:10.00,isNew:true,ing:['Eisbergsalat','Hähnchen','Tomaten','Gurken','Mais','Paprika','Zwiebeln'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'89s',name:'Kebap Salat',desc:'Eisbergsalat, Tomaten, Gurken, Kebap, Zwiebeln und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Kebap','Zwiebeln','Käse'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'72',name:'Thunfisch Salat',desc:'Eisbergsalat, Tomaten, Gurken und Thunfisch',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'73',name:'Cobansalat',desc:'Eisbergsalat, Tomaten, Gurken, Hirtenkäse, Peperoni und Zwiebeln',price:8.00,ing:['Eisbergsalat','Tomaten','Gurken','Hirtenkäse','Peperoni','Zwiebeln'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'74',name:'Hähnchensalat',desc:'Eisbergsalat, Tomaten, Gurken, Hähnchenfleisch, Zwiebeln und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Hähnchen','Zwiebeln','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'75',name:'Spezialsalat',desc:'Eisbergsalat, Tomaten, Gurken, fr. Paprika, Mais, Thunfisch, Schinken, Ei und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Paprika','Mais','Thunfisch','Schinken','Ei','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'76',name:'Hirtensalat',desc:'Eisbergsalat, Tomaten, Gurken, Hirtenkäse und Oliven',price:7.50,ing:['Eisbergsalat','Tomaten','Gurken','Hirtenkäse','Oliven'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'77',name:'Thunfisch Spezialsalat',desc:'Eisbergsalat, Tomaten, Gurken, Thunfisch, Oliven, Peperoni, Zwiebeln',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch','Oliven','Peperoni','Zwiebeln'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'79s',name:'Fit Industry Salat',desc:'Eisbergsalat, Hähnchenbruststreifen, Tomaten, Gurken, Mais, fr. Paprika und Zwiebeln',price:10.00,isNew:true,ing:['Eisbergsalat','Hähnchen','Tomaten','Gurken','Mais','Paprika','Zwiebeln'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'89s',name:'Kebap Salat',desc:'Eisbergsalat, Tomaten, Gurken, Kebap, Zwiebeln und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Kebap','Zwiebeln','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
   ]},
   snacks:{title:'Snacks & Dips',icon:'🍗',items:[
     {id:'78',name:'Brot',desc:'Kleines, mittleres oder großes Brot',sizes:{Klein:1.50,Mittel:2.00,Groß:2.50},ing:['Brot'],ex:[]},
@@ -600,7 +610,7 @@ const menu={
     {id:'79a',name:"Mama's Favorite",desc:'Fladenbrot mit Käse überbacken, Feta, Jalapeños',sizes:{Klein:5.00,Mittel:6.00,Groß:7.00},isNew:true,isSpicy:true,ing:['Fladenbrot','Käse','Feta','Jalapeños'],ex:['cheese','hirtenkase','mushrooms','olives','paprika','mais','jalapenos','peperoni','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade','hollandaise']},
     {id:'80',name:'Pizzabrötchen',desc:'6 Stück Minibrötchen mit Dip',price:4.50,ing:['Minibrötchen','1 Dip'],ex:['cheese','hirtenkase','mushrooms','olives','paprika','mais','jalapenos','peperoni','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade','hollandaise']},
     {id:'81sn',name:'Chicken Nuggets',desc:'6 Stück mit Dip',price:4.50,isNew:true,ing:['Chicken Nuggets','1 Dip'],ex:['cheese','hirtenkase','mushrooms','olives','paprika','mais','jalapenos','peperoni','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade','hollandaise']},
-    {id:'82sn',name:'Mozzarella Sticks',desc:'6 Stück mit Dip',price:5.00,isNew:true,ing:['Mozzarella Sticks','1 Dip'],ex:['cheese','hirtenkase','mushrooms','olives','paprika','mais','jalapenos','peperoni','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade','hollandaise']},
+    {id:'82sn',name:'Mozzarella Sticks',desc:'4 Stück mit Dip',price:5.00,isNew:true,ing:['Mozzarella Sticks','1 Dip'],ex:['cheese','hirtenkase','mushrooms','olives','paprika','mais','jalapenos','peperoni','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade','hollandaise']},
     {id:'100',name:'Pommes frites',desc:'Mit Mayo oder Ketchup',price:4.00,ing:['Pommes frites','Mayo/Ketchup'],ex:['cheese','hirtenkase','mushrooms','olives','paprika','mais','jalapenos','peperoni','tzatziki','chili','bbq','knoblauch','mayo','ketchup','remoulade','hollandaise']},
     {id:'d1',name:'Tzatziki (Dip)',desc:'',price:2.00,ing:['Tzatziki'],ex:[]},
     {id:'d2',name:'Kräuterbutter (Dip)',desc:'',price:2.00,ing:['Kräuterbutter'],ex:[]},
@@ -684,7 +694,11 @@ function buildCard(item){
     priceHtml=`<div class="single-price-row"><span class="price-tag">€${item.price.toFixed(2)}</span></div>`;
   }
   const inCart=isInCart(item.id);
-  div.innerHTML=`${badges}<div class="item-body"><div class="item-num">Nr. ${item.id}</div><div class="item-name">${item.name}</div>${item.desc?`<div class="item-desc">${item.desc}</div>`:''}${priceHtml}<div class="card-btns"><button class="add-btn${inCart?' added':''}" onclick="quickAdd('${item.id}',event)">${inCart?'✓ Im Warenkorb':'＋ Hinzufügen'}</button><button class="customize-btn" onclick="openModal('${item.id}',event)">⚙ Anpassen</button></div></div>`;
+  const isDrink=item.id.startsWith('g');
+  const btns=isDrink
+    ? `<button class="add-btn${inCart?' added':''}" onclick="quickAdd('${item.id}',event)">${inCart?'✓ Im Warenkorb':'＋ Hinzufügen'}</button>`
+    : `<button class="add-btn${inCart?' added':''}" onclick="quickAdd('${item.id}',event)">${inCart?'✓ Im Warenkorb':'＋ Hinzufügen'}</button><button class="customize-btn" onclick="openModal('${item.id}',event)">⚙ Anpassen</button>`;
+  div.innerHTML=`${badges}<div class="item-body"><div class="item-num">Nr. ${item.id}</div><div class="item-name">${item.name}</div>${item.desc?`<div class="item-desc">${item.desc}</div>`:''}${priceHtml}<div class="card-btns">${btns}</div></div>`;
   return div;
 }
 
@@ -743,11 +757,12 @@ function buildModalBody(){
   }
   // extras grouped by category
   if(item.ex&&item.ex.length){
-    const groups={meat:[],veg:[],sauce:[]};
+    const groups={meat:[],veg:[],sauce:[],side:[]};
     const groupLabels={
       meat:  isFamilie() ? '🥩 Fleisch (+4,00 €)' : '🥩 Fleisch (+2,00 €)',
       veg:   isFamilie() ? '🥦 Gemüse & Käse (+2,00 €)' : '🥦 Gemüse & Käse (+1,00 €)',
       sauce: isFamilie() ? '🫙 Saucen (+2,00 €)' : '🫙 Saucen (+1,00 €)',
+      side:  '🍞 Beilage'
     };
     item.ex.forEach(k=>{
       const ex=EXTRAS[k];
@@ -796,12 +811,12 @@ function modalSize(s){
 function refreshExtrasDisplay(){
   const {item,extras}=ms;
   if(!item.ex||!item.ex.length) return;
-  const groups={meat:[],veg:[],sauce:[],family:[]};
+  const groups={meat:[],veg:[],sauce:[],side:[]};
   const groupLabels={
     meat: isFamilie() ? '🥩 Fleisch (+4,00 €)' : '🥩 Fleisch (+2,00 €)',
     veg:  isFamilie() ? '🥦 Gemüse & Käse (+2,00 €)' : '🥦 Gemüse & Käse (+1,00 €)',
     sauce:isFamilie() ? '🫙 Saucen (+2,00 €)' : '🫙 Saucen (+1,00 €)',
-    family:'👨‍👩‍👧‍👦 Familiengröße'
+    side: '🍞 Beilage'
   };
   item.ex.forEach(k=>{
     const ex=EXTRAS[k];
@@ -967,7 +982,7 @@ let toastT;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
 
 renderMenu();
-  
+
 // ════════════ HIDE NAV ON SCROLL (mobile) ════════════
 (function(){
   let lastY=0, ticking=false;
