@@ -593,8 +593,8 @@ const menu={
     {id:'69a',name:'Emlichheim-Auflauf',desc:'Kartoffel-Gratin, Hähnchenbruststreifen, Mais, Brokkoli, Sauce Hollandaise, mit Käse überbacken',price:10.00,ing:['Kartoffel-Gratin','Hähnchen','Mais','Brokkoli','Sauce Hollandaise','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','bolognese','cheese','hirtenkase','mushrooms','olives','onions','paprika','mais','brokkoli','jalapenos','hollandaise','chili']},
   ]},
   salat:{title:'Salat',icon:'🥗',items:[
-    {id:'70',name:'Chefsalat',desc:'Eisbergsalat, Tomaten, Gurken, Thunfisch, Hirtenkäse und Ei (+4 Brötchen nur €1,50)',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch','Hirtenkäse','Ei'],ex:['broetchen','broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
-    {id:'71',name:'Gemischter Salat',desc:'Eisbergsalat, Tomaten, Gurken und Zwiebeln',sizes:{Klein:4.50,Groß:7.00},ing:['Eisbergsalat','Tomaten','Gurken','Zwiebeln'],ex:['kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'70',name:'Chefsalat',desc:'Eisbergsalat, Tomaten, Gurken, Thunfisch, Hirtenkäse und Ei (+4 Brötchen nur €1,50)',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch','Hirtenkäse','Ei'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
+    {id:'71',name:'Gemischter Salat',desc:'Eisbergsalat, Tomaten, Gurken und Zwiebeln',sizes:{Klein:4.50,Groß:7.00},ing:['Eisbergsalat','Tomaten','Gurken','Zwiebeln'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
     {id:'72',name:'Thunfisch Salat',desc:'Eisbergsalat, Tomaten, Gurken und Thunfisch',price:9.00,ing:['Eisbergsalat','Tomaten','Gurken','Thunfisch'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
     {id:'73',name:'Cobansalat',desc:'Eisbergsalat, Tomaten, Gurken, Hirtenkäse, Peperoni und Zwiebeln',price:8.00,ing:['Eisbergsalat','Tomaten','Gurken','Hirtenkäse','Peperoni','Zwiebeln'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
     {id:'74',name:'Hähnchensalat',desc:'Eisbergsalat, Tomaten, Gurken, Hähnchenfleisch, Zwiebeln und Käse',price:10.00,ing:['Eisbergsalat','Tomaten','Gurken','Hähnchen','Zwiebeln','Käse'],ex:['broetchen','kebap','haehnchen','thunfisch','cheese','hirtenkase','mozzarella','olives','onions','paprika','mais','tomaten','jalapenos','peperoni','ei','hollandaise','tzatziki','mayo','knoblauch','remoulade']},
@@ -809,38 +809,12 @@ function modalSize(s){
 }
 
 function refreshExtrasDisplay(){
-  const {item,extras}=ms;
-  if(!item.ex||!item.ex.length) return;
-  const groups={meat:[],veg:[],sauce:[],side:[]};
-  const groupLabels={
-    meat: isFamilie() ? '🥩 Fleisch (+4,00 €)' : '🥩 Fleisch (+2,00 €)',
-    veg:  isFamilie() ? '🥦 Gemüse & Käse (+2,00 €)' : '🥦 Gemüse & Käse (+1,00 €)',
-    sauce:isFamilie() ? '🫙 Saucen (+2,00 €)' : '🫙 Saucen (+1,00 €)',
-    side: '🍞 Beilage'
-  };
-  item.ex.forEach(k=>{
-    const ex=EXTRAS[k];
-    if(ex&&groups[ex.cat]) groups[ex.cat].push(k);
-  });
-  let extHtml='';
-  for(const [cat,keys] of Object.entries(groups)){
-    if(!keys.length) continue;
-    extHtml+=`<div class="extras-cat-label">${groupLabels[cat]}</div><div class="extras-grid">`;
-    extHtml+=keys.map(k=>{
-      const ex=EXTRAS[k]; if(!ex) return '';
-      const sel=!!extras[k];
-      const price=getExtraPrice(k);
-      return `<div class="extra-row${sel?' selected':''}" onclick="toggleExtra('${k}')"><div class="extra-check">${sel?'✓':''}</div><span class="extra-label">${ex.label}</span><span class="extra-price">+€${price.toFixed(2)}</span></div>`;
-    }).join('');
-    extHtml+='</div>';
-  }
-  // Find and replace only the extras portion in modal body
   const body=document.getElementById('modalBody');
-  const secLabel=body.querySelector('.modal-section-label:last-of-type');
-  // Rebuild full modal body to update prices
+  const scrollTop=body.scrollTop;
   const noteVal=ms.note;
   buildModalBody();
   ms.note=noteVal;
+  body.scrollTop=scrollTop;
 }
 
 function toggleRemove(ing){
