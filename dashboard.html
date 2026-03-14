@@ -221,7 +221,7 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-
     <div class="stat prep"><div class="s-num" id="statPrep">0</div><div class="s-lbl">🟡 In Arbeit</div></div>
     <div class="stat done"><div class="s-num" id="statDone">0</div><div class="s-lbl">🟢 Fertig</div></div>
     <div class="stat total"><div class="s-num" id="statTotal">0</div><div class="s-lbl">📦 Gesamt</div></div>
-    <div class="stat revenue"><div class="s-num" id="statRevenue">€0</div><div class="s-lbl">💰 Umsatz</div></div>
+
   </div>
 
   <!-- FILTERS -->
@@ -397,8 +397,6 @@ function updateStats(){
   document.getElementById('statPrep').textContent = allOrders.filter(o=>o.status==='preparing').length;
   document.getElementById('statDone').textContent = allOrders.filter(o=>o.status==='done').length;
   document.getElementById('statTotal').textContent= todayOrders.length;
-  const rev = todayOrders.filter(o=>o.status!=='cancelled').reduce((s,o)=>s+(o.total||0),0);
-  document.getElementById('statRevenue').textContent = '€' + rev.toFixed(2);
 }
 
 // ════ FILTER ════
