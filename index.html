@@ -1187,7 +1187,7 @@ async function sendWhatsApp(e){
 
   cart.forEach((c,i)=>{
     const line=c.price*c.qty;
-    msg+=`${i+1}. *${c.name}*`;
+    msg+=`*${c.name}*`;
     if(c.size) msg+=` (${c.size})`;
     msg+=`\n   x${c.qty}  →  €${line.toFixed(2)}\n`;
     if(c.extArr?.length) msg+=`   ➕ ${c.extArr.join(', ')}\n`;
@@ -1199,7 +1199,7 @@ async function sendWhatsApp(e){
   msg+=`⏱️ *${timingText}*\n`;
   if(addr) msg+=`📍 *Lieferadresse:* ${addr}\n`;
   if(note) msg+=`📝 *Anmerkung:* ${note}\n`;
-  msg+='\nVielen Dank für Ihre Bestellung! 🙏';
+  msg+='\nWir prüfen Ihre Bestellung und bestätigen sie in Kürze! 🙏';
   const waUrl = 'https://wa.me/491625985995?text='+encodeURIComponent(msg);
   // على الموبايل window.open يُحجب داخل async — نستخدم location.href
   if(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)){
