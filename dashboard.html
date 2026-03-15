@@ -444,6 +444,8 @@ function buildCard(o, isNew=false){
     <div class="card-item">
       <div class="ci-left">
         <div class="ci-name">${it.qty}× ${esc(it.name)}${it.size?` <span class="ci-size">(${esc(it.size)})</span>`:''}</div>
+        ${it.dressing?`<div class="ci-extras">🥗 ${esc(it.dressing)}</div>`:''}
+        ${it.sauce?`<div class="ci-extras">🆓 ${esc(it.sauce)}</div>`:''}
         ${it.extras?.length?`<div class="ci-extras">➕ ${it.extras.map(esc).join(', ')}</div>`:''}
         ${it.removed?.length?`<div class="ci-removed">❌ Ohne: ${it.removed.map(esc).join(', ')}</div>`:''}
         ${it.note?`<div class="ci-note">📝 "${esc(it.note)}"</div>`:''}
@@ -546,6 +548,7 @@ function openPrint(id){
             <span class="receipt-item-name">${it.qty}× ${esc(it.name)}${it.size?` (${esc(it.size)})`:''}</span>
             <span>€${(it.line||0).toFixed(2)}</span>
           </div>
+          ${it.sauce?`<div class="receipt-extra">🆓 Sauce: ${esc(it.sauce)}</div>`:''}
           ${it.extras?.length?`<div class="receipt-extra">+ ${it.extras.map(esc).join(', ')}</div>`:''}
           ${it.removed?.length?`<div class="receipt-extra">Ohne: ${it.removed.map(esc).join(', ')}</div>`:''}
           ${it.note?`<div class="receipt-extra">Notiz: ${esc(it.note)}</div>`:''}
